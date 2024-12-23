@@ -50,6 +50,7 @@ export default function Home() {
     }, 1000); 
     return () => clearInterval(intervalId);
   }, [lastFetchedDate]);
+  console.log(data);
 
   return (
     <main className="font-[family-name:var(--font-geist-sans)] min-h-screen p-6 bg-gray-950">
