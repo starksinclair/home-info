@@ -12,6 +12,5 @@ export async function GET() {
     const weatherData = await weather.json()
     const quoteData = await quote.text()
     const data = {weather: weatherData, quote: quoteData}
-    console.log(data)
     return NextResponse.json(data);
 }

@@ -53,32 +53,34 @@ export default function Home() {
   console.log(data);
 
   return (
-    <main className="font-[family-name:var(--font-geist-sans)] min-h-screen p-6 bg-gray-950">
-      <div className="h-screen flex flex-col text-white">
-        <div className="grid grid-cols-3 gap-6 mb-8 flex-1">
-          <div className="bg-gray-900/80 rounded-lg shadow-lg p-4 border border-gray-800">
-            <h2 className="text-[clamp(2rem,5vw,3.5rem)] text-center font-semibold mb-4">Weather</h2>
+    <main className="font-[family-name:var(--font-geist-sans)] min-h-screen p-3 sm:p-6 bg-gray-950">
+      <div className="h-screen flex flex-col text-white gap-4">
+        {/* Info Board Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 flex-1">
+          {/* Weather Card */}
+          <div className="bg-gray-900/80 rounded-lg shadow-lg p-3 sm:p-4 border border-gray-800">
+            <h2 className="text-[clamp(1.5rem,4vw,3.5rem)] text-center font-semibold mb-2 sm:mb-4">Weather</h2>
             {data ? (
-              <div className="space-y-4">
+              <div className="space-y-2 sm:space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-[clamp(2.5rem,6vw,4rem)] font-bold">
+                    <div className="text-[clamp(2rem,5vw,4rem)] font-bold">
                       {data.weather.current.temp_f}°F
                     </div>
-                    <div className="text-[clamp(1rem,2vw,1.25rem)] text-gray-400 flex gap-2">
+                    <div className="text-[clamp(0.875rem,1.5vw,1.25rem)] text-gray-400 flex gap-2">
                       Feels like <p className='font-bold text-white'>{data.weather.current.feelslike_f}°F</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-[clamp(1.1rem,2vw,1.5rem)] text-gray-400">
+                    <p className="text-[clamp(1rem,1.5vw,1.5rem)] text-gray-400">
                       {currentTime}
                     </p>
-                    <p className="text-[clamp(0.9rem,1.5vw,1.25rem)] text-gray-400">
+                    <p className="text-[clamp(0.875rem,1.2vw,1.25rem)] text-gray-400">
                       {data.weather.location.name}
                     </p>
                   </div>
                 </div>
-                <div className="flex justify-between text-[clamp(1rem,2vw,1.25rem)]">
+                <div className="flex justify-between text-[clamp(0.875rem,1.5vw,1.25rem)]">
                   <div>
                     <span className="text-gray-400">Highs: </span>
                     <span>{data.weather.forecast.forecastday[0].day.maxtemp_f}°F</span>
@@ -88,7 +90,7 @@ export default function Home() {
                     <span>{data.weather.forecast.forecastday[0].day.mintemp_f}°F</span>
                   </div>
                 </div>
-                <div className="text-[clamp(1rem,2vw,1.25rem)] text-gray-400">
+                <div className="text-[clamp(0.875rem,1.5vw,1.25rem)] text-gray-400">
                   {data.weather.current.condition.text}
                 </div>
               </div>
@@ -99,18 +101,26 @@ export default function Home() {
               </div>
             )}
           </div>
-          <div className="bg-gray-900/80 rounded-lg shadow-lg p-4 border border-gray-800">
-            <h2 className="text-[clamp(2rem,5vw,3.5rem)] text-center font-semibold mb-4">Verse of the Day</h2>
+
+          {/* Quote Card */}
+          <div className="bg-gray-900/80 rounded-lg shadow-lg p-3 sm:p-4 border border-gray-800">
+            <h2 className="text-[clamp(1.5rem,4vw,3.5rem)] text-center font-semibold mb-2 sm:mb-4">Verse of the Day</h2>
             {data ? (
-              <p className="flex items-center text-center text-[clamp(1rem,2vw,1.7rem)] text-pretty italic m-auto">&#34; {data.quote} &#34; </p>
+              <div className="h-[calc(100%-3rem)] flex items-center justify-center">
+                <p className="text-center text-[clamp(0.875rem,1.5vw,1.7rem)] text-pretty italic">
+                  &#34; {data.quote} &#34;
+                </p>
+              </div>
             ) : (
               <div className="animate-pulse h-16 bg-gray-700 rounded w-full"></div>
             )}
           </div>
-          <div className="bg-gray-900/80 rounded-lg shadow-lg p-4 border border-gray-800">
-            <h2 className="text-5xl text-center font-semibold mb-4">Photo of the Day</h2>
-            <div className="flex items-center justify-center h-full">
-              <div className="relative w-full h-[29rem] overflow-hidden rounded-lg">
+
+          {/* Photo Card */}
+          <div className="bg-gray-900/80 rounded-lg shadow-lg p-3 sm:p-4 border border-gray-800">
+            <h2 className="text-[clamp(1.5rem,4vw,3.5rem)] text-center font-semibold mb-2 sm:mb-4">Photo of the Day</h2>
+            <div className="flex items-center justify-center h-[29rem]">
+              <div className="relative w-full h-full min-h-[200px] overflow-hidden rounded-lg">
                 <Image 
                   src="https://drive.usercontent.google.com/download?id=1FsIoegD4Gt4NHSK0NM3ufkwyFO41K9Rx&export=view&authuser=0"
                   alt="Photo of the Day"
@@ -124,30 +134,18 @@ export default function Home() {
         </div>
         
         {/* Schedule Section */}
-        <div className="bg-gray-900/80 rounded-lg shadow-lg p-6 border border-gray-800 flex-1">
-          <h2 className="text-2xl font-semibold mb-6">Team Schedule</h2>
-          <div className="grid grid-cols-5 gap-4 h-[calc(100%-4rem)]">
-            {/* Repeat this div structure for each person */}
-            <div className="border border-gray-800 rounded-lg p-4 bg-gray-900/50">
-              <h3 className="text-lg font-medium mb-3">Person 1</h3>
-              {/* Schedule component will go here */}
-            </div>
-            <div className="border border-gray-800 rounded-lg p-4 bg-gray-900/50">
-              <h3 className="text-lg font-medium mb-3">Person 2</h3>
-              {/* Schedule component will go here */}
-            </div>
-            <div className="border border-gray-800 rounded-lg p-4 bg-gray-900/50">
-              <h3 className="text-lg font-medium mb-3">Person 3</h3>
-              {/* Schedule component will go here */}
-            </div>
-            <div className="border border-gray-800 rounded-lg p-4 bg-gray-900/50">
-              <h3 className="text-lg font-medium mb-3">Person 4</h3>
-              {/* Schedule component will go here */}
-            </div>
-            <div className="border border-gray-800 rounded-lg p-4 bg-gray-900/50">
-              <h3 className="text-lg font-medium mb-3">Person 5</h3>
-              {/* Schedule component will go here */}
-            </div>
+        <div className="bg-gray-900/80 rounded-lg shadow-lg p-4 sm:p-6 border border-gray-800 flex-1">
+          <h2 className="text-[clamp(1.25rem,3vw,2rem)] font-semibold mb-4 sm:mb-6">Team Schedule</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 h-[calc(100%-4rem)]">
+            {/* Schedule Cards */}
+            {[1, 2, 3, 4, 5].map((person) => (
+              <div key={person} className="border border-gray-800 rounded-lg p-3 sm:p-4 bg-gray-900/50">
+                <h3 className="text-[clamp(1rem,2vw,1.25rem)] font-medium mb-2 sm:mb-3">
+                  Person {person}
+                </h3>
+                {/* Schedule component will go here */}
+              </div>
+            ))}
           </div>
         </div>
       </div>
